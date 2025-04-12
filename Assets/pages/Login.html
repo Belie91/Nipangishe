@@ -9,10 +9,10 @@
   <body>
     <div class="login-container">
       <h2>Login to RentEase</h2>
-      <form class="login-form">
+      <form class="login-form" onsubmit="loginUser(event)">
         <!-- Select Role -->
-        <label for="role">Login as:</label>
-        <select id="role" onchange="toggleFormFields()">
+        <label for="loginRole">Login as:</label>
+        <select id="loginRole" onchange="toggleFormFields()" required>
           <option value="">--Select--</option>
           <option value="lessor">Lessor (House Owner)</option>
           <option value="lessee">Lessee (House Seeker)</option>
@@ -20,8 +20,13 @@
 
         <!-- Common Fields -->
         <div class="common-fields">
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
+          <input type="email" id="loginEmail" placeholder="Email" required />
+          <input
+            type="password"
+            id="loginPassword"
+            placeholder="Password"
+            required
+          />
         </div>
 
         <!-- Lessor Fields -->
@@ -73,7 +78,7 @@
           localStorage.setItem("loggedInUser", JSON.stringify(registeredUser));
 
           // Redirect to dashboard
-          window.location.href = "dashboard.html";
+          window.location.href = "/Assets/pages/dashboard.html";
         } else {
           alert("Invalid login credentials or role.");
         }
