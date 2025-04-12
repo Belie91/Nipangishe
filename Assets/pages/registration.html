@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - RentEase</title>
+    <link rel="stylesheet" href="/Assets/styles/style.css" />
+  </head>
+  <body>
+    <div class="register-container">
+      <h2>Create a RentEase Account</h2>
+      <form class="register-form" onsubmit="return validateForm(event)">
+        <!-- Select Role -->
+        <label for="regRole">Register as:</label>
+        <select id="regRole" required onchange="toggleRegisterFields()">
+          <option value="">--Select--</option>
+          <option value="lessor">Lessor (House Owner)</option>
+          <option value="lessee">Lessee (House Seeker)</option>
+        </select>
+
+        <!-- Common Fields -->
+        <input type="text" id="fullName" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="location" placeholder="Location" required />
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Phone Number"
+          required
+          pattern="^[0-9]{10,15}$"
+        />
+        <input
+          type="password"
+          id="password"
+          placeholder="Create Password"
+          required
+          minlength="6"
+        />
+
+        <!-- Lessor Extra -->
+        <div class="lessor-extra" style="display: none">
+          <input
+            type="text"
+            id="businessName"
+            placeholder="Business Name (Optional)"
+          />
+        </div>
+
+        <!-- Lessee Extra -->
+        <div class="lessee-extra" style="display: none">
+          <input
+            type="text"
+            id="preferredLocation"
+            placeholder="Preferred Renting Location (Optional)"
+          />
+        </div>
+
+        <button type="submit">Register</button>
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+          <div class="modal-content">
+            <h3>✅ Registration Successful!</h3>
+            <p>You can now log in to your account.</p>
+            <button onclick="goToLogin()">Go to Login</button>
+          </div>
+        </div>
+
+        <p>Already have an account? <a href="login.html">Login here</a></p>
+      </form>
+
+      <script>
+        function toggleRegisterFields() {
+          const role = document.getElementById("regRole").value;
+          document.querySelector(".lessor-extra").style.display =
+            role === "lessor" ? "block" : "none";
+          document.querySelector(".lessee-extra").style.display =
+            role === "lessee" ? "block" : "none";
+        }
+
+        function validateForm(event) {
+          event.preventDefault();
+
+          const name = document.getElementById("fullName").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const phone = document.getElementById("phone").value.trim();
+          const password = document.getElementById("password").value;
+
+          if (!name || !email || !phone || !password) {
+            alert("Please fill in all required fields.");
+            return false;
+          }
+
+          if (!/^[0-9]{10,15}$/.test(phone)) {
+            alert("Phone number must be 10 to 15 digits.");
+            return false;
+          }
+
+          if (password.length < 6) {
+            alert("Password must be at least 6 characters.");
+            return false;
+          }
+
+          // Store data (demo)
+          const user = {
+            role: document.getElementById("regRole").value,
+            name: name,
+            email: email,
+            phone: phone,
+            location: document.getElementById("location").value,
+            password: password,
+            businessName: document.getElementById("businessName")?.value || "",
+            preferredLocation:
+              document.getElementById("preferredLocation")?.value || "",
+          };
+          localStorage.setItem("registeredUser", JSON.stringify(user));
+
+          // Show the modal
+          document.getElementById("successModal").style.display = "flex";
+
+          return false;
+        }
+
+        function goToLogin() {
+          window.location.href = "login.html";
+        }
+      </script>
+    </div>
+
+    <script>
+      function toggleRegisterFields() {
+        const role = document.getElementById("regRole").value;
+        document.querySelector(".lessor-extra").style.display =
+          role === "lessor" ? "block" : "none";
+        document.querySelector(".lessee-extra").style.display =
+          role === "lessee" ? "block" : "none";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - RentEase</title>
+    <link rel="stylesheet" href="/Assets/styles/style.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Login to RentEase</h2>
+      <form class="login-form">
+        <!-- Select Role -->
+        <label for="role">Login as:</label>
+        <select id="role" onchange="toggleFormFields()">
+          <option value="">--Select--</option>
+          <option value="lessor">Lessor (House Owner)</option>
+          <option value="lessee">Lessee (House Seeker)</option>
+        </select>
+
+        <!-- Common Fields -->
+        <div class="common-fields">
+          <input type="email" placeholder="Email" required />
+          <input type="password" placeholder="Password" required />
+        </div>
+
+        <!-- Lessor Fields -->
+        <div class="lessor-fields" style="display: none">
+          <input type="text" placeholder="Business Name (Optional)" />
+          <input type="text" placeholder="Phone Number" />
+        </div>
+
+        <!-- Lessee Fields -->
+        <div class="lessee-fields" style="display: none">
+          <input type="text" placeholder="Full Name" />
+          <input type="text" placeholder="Phone Number" />
+        </div>
+
+        <button type="submit">Login</button>
+        <p>
+          Don't have an account? <a href="registration.html">Register here</a>
+        </p>
+
+        <!--this should be implemented-->
+        <p><a href="#">Forgot Password?</a></p>
+        <p><a href="#">Back to Home</a></p>
+      </form>
+    </div>
+
+    <script>
+      function loginUser(event) {
+        event.preventDefault();
+
+        const role = document.getElementById("loginRole").value;
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        const registeredUser = JSON.parse(
+          localStorage.getItem("registeredUser")
+        );
+
+        if (!registeredUser) {
+          alert("No user registered yet. Please register first.");
+          return false;
+        }
+
+        if (
+          email === registeredUser.email &&
+          password === registeredUser.password && // We now check password
+          role === registeredUser.role
+        ) {
+          // Save user into session (or override localStorage)
+          localStorage.setItem("loggedInUser", JSON.stringify(registeredUser));
+
+          // Redirect to dashboard
+          window.location.href = "dashboard.html";
+        } else {
+          alert("Invalid login credentials or role.");
+        }
+
+        return false;
+      }
+    </script>
+  </body>
+</html>

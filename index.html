@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentEase - Find Your Next Home</title>
+    <link rel="stylesheet" href="/Assets/styles/style.css" />
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">🏠 RentEase</div>
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Search Homes</a></li>
+          <li><a href="#list-property">List Property</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="/Assets/pages/Login.html">Login</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section with Search -->
+    <main>
+      <section class="hero">
+        <h1>Find Your Next Home Easily</h1>
+        <p>
+          Search and rent houses around your area or list your own property for
+          others to find.
+        </p>
+        <input type="text" placeholder="Search by location..." />
+        <button>Search</button>
+      </section>
+
+      <!-- Carousel Section -->
+      <section class="carousel">
+        <h2>Featured Homes</h2>
+        <div class="carousel-container">
+          <img
+            src="https://via.placeholder.com/400x250?text=House+1"
+            alt="House 1"
+          />
+          <img
+            src="https://via.placeholder.com/400x250?text=House+2"
+            alt="House 2"
+          />
+          <img
+            src="https://via.placeholder.com/400x250?text=House+3"
+            alt="House 3"
+          />
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features">
+        <h2>Why Choose RentEase?</h2>
+        <div class="feature-cards">
+          <div class="card">
+            <h3>Verified Listings</h3>
+            <p>Only real and verified homes.</p>
+          </div>
+          <div class="card">
+            <h3>Easy to Use</h3>
+            <p>Simple interface for renters and owners.</p>
+          </div>
+          <div class="card">
+            <h3>Reviews & Ratings</h3>
+            <p>Read reviews before renting.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="reviews">
+        <h2>User Reviews</h2>
+        <div class="review">
+          <p>"Found a lovely house within minutes!" – Asha M.</p>
+        </div>
+        <div class="review">
+          <p>"Listing my property was easy and quick." – James K.</p>
+        </div>
+      </section>
+
+      <!-- List Property Section -->
+      <section id="list-property" class="list-property">
+        <h2>List Your Property</h2>
+        <form class="property-form">
+          <input type="text" placeholder="Property Title" required />
+          <input type="text" placeholder="Location" required />
+          <input type="number" placeholder="Price (Tsh)" required />
+          <input type="url" placeholder="Image URL" required />
+          <textarea placeholder="Description" required></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div>
+          <h4>About Us</h4>
+          <p>RentEase connects renters and property owners across Tanzania.</p>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <p>Email: support@rentease.co.tz</p>
+          <p>Phone: +255 700 123 456</p>
+        </div>
+        <div>
+          <h4>Help</h4>
+          <p>FAQs</p>
+          <p>Privacy Policy</p>
+          <p>Terms of Service</p>
+        </div>
+      </div>
+      <p class="copyright">© 2025 RentEase</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Login</h2>
+        <input type="text" placeholder="Email or Username" />
+        <input type="password" placeholder="Password" />
+        <button>Login</button>
+      </div>
+    </div>
+
+    <script>
+      function openModal() {
+        document.getElementById("loginModal").style.display = "flex";
+      }
+      function closeModal() {
+        document.getElementById("loginModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
