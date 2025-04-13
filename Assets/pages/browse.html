@@ -11,10 +11,12 @@
 
     <!-- 🔎 Filters -->
     <div class="filters">
+      <input type="text" id="searchKeyword" placeholder="Search keyword..." />
       <input type="text" id="filterLocation" placeholder="Filter by Location" />
       <input type="number" id="filterMinPrice" placeholder="Min Price" />
       <input type="number" id="filterMaxPrice" placeholder="Max Price" />
       <button onclick="filterListings()">Filter</button>
+      <button class="reset-btn" onclick="resetFilters()">Reset</button>
     </div>
 
     <!-- 📋 Listings -->

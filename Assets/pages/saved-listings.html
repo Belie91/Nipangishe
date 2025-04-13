@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saved Listings</title>
+    <link rel="stylesheet" href="/Assets/styles/style.css" />
+  </head>
+  <body>
+    <h2>💖 My Saved Listings</h2>
+    <div id="savedListings" class="listing-container"></div>
+
+    <script>
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const saved =
+        JSON.parse(localStorage.getItem("favorites_" + user.email)) || [];
+
+      const container = document.getElementById("savedListings");
+      container.innerHTML = "";
+
+      if (saved.length === 0) {
+        container.innerHTML = "<p>No saved listings.</p>";
+      }
+
+      saved.forEach((house) => {
+        const card = document.createElement("div");
+        card.className = "listing-card";
+        card.innerHTML = `
+        <img src="${house.image}" alt="House" class="listing-img" />
+        <h3>${house.title}</h3>
+        <p><strong>Location:</strong> ${house.location}</p>
+        <p><strong>Price:</strong> TSh ${house.price}</p>
+        <p>${house.description}</p>
+        <button onclick="removeFromFavorites(${house.id})">Remove</button>
+      `;
+        container.appendChild(card);
+      });
+
+      function removeFromFavorites(houseId) {
+        let updated =
+          JSON.parse(localStorage.getItem("favorites_" + user.email)) || [];
+        updated = updated.filter((h) => h.id !== houseId);
+        localStorage.setItem(
+          "favorites_" + user.email,
+          JSON.stringify(updated)
+        );
+        location.reload();
+      }
+    </script>
+  </body>
+</html>
