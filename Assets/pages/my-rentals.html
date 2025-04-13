@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Rentals - RentEase</title>
+    <link rel="stylesheet" href="Assets/styles/style.css" />
+  </head>
+  <body>
+    <h2>🏘 My Rented Houses</h2>
+    <div id="rentedList" class="listing-container"></div>
+
+    <script>
+      const user = JSON.parse(localStorage.getItem("loggedInUser"));
+      const rentals =
+        JSON.parse(localStorage.getItem("rentedBy_" + user.email)) || [];
+
+      const container = document.getElementById("rentedList");
+
+      if (rentals.length === 0) {
+        container.innerHTML = "<p>You haven't rented any houses yet.</p>";
+      } else {
+        rentals.forEach((h) => {
+          const card = document.createElement("div");
+          card.className = "listing-card";
+          card.innerHTML = `
+          <img src="${h.image}" alt="House" class="listing-img" />
+          <h3>${h.title}</h3>
+          <p><strong>Location:</strong> ${h.location}</p>
+          <p><strong>Price:</strong> TSh ${h.price}</p>
+          <p>${h.description}</p>
+          <p style="color: green"><strong>Status:</strong> Rented</p>
+        `;
+          container.appendChild(card);
+        });
+      }
+    </script>
+  </body>
+</html>

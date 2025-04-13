@@ -75,14 +75,19 @@
           card.className = "listing-card";
 
           card.innerHTML = `
-            <img src="${house.image}" alt="House Image" class="listing-img"/>
-            <h3>${house.title}</h3>
-            <p><strong>Location:</strong> ${house.location}</p>
-            <p><strong>Price:</strong> TSh ${house.price}</p>
-            <p>${house.description}</p>
-            <button onclick="openEditModal(${house.id})">Edit</button>
-            <button onclick="deleteListing(${house.id})">Delete</button>
-          `;
+  <img src="${house.image}" alt="House Image" class="listing-img"/>
+  <h3>${house.title}</h3>
+  <p><strong>Location:</strong> ${house.location}</p>
+  <p><strong>Price:</strong> TSh ${house.price}</p>
+  <p>${house.description}</p>
+  ${
+    house.rented
+      ? '<p style="color: red;"><strong>Status:</strong> Rented</p>'
+      : ""
+  }
+  <button onclick="openEditModal(${house.id})">Edit</button>
+  <button onclick="deleteListing(${house.id})">Delete</button>
+`;
 
           listingsDiv.appendChild(card);
         });
