@@ -16,10 +16,15 @@ header {
   padding: 15px 30px;
 }
 
+/*nav reponsive*/
+/* General Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
+  background-color: #004080;
+  color: white;
 }
 
 .nav-links {
@@ -32,6 +37,13 @@ header {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
+}
+
+.menu-icon {
+  display: none; /* Hidden by default */
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
 }
 
 .hero {
@@ -143,14 +155,26 @@ footer .copyright {
 
 /* Responsive Navbar */
 @media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    background-color: #003060;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    display: none;
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background-color: #004080;
+      padding: 10px;
+      border-radius: 5px;
+      width: 200px;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    .menu-icon {
+      display: block;
+    }
   }
 }
 

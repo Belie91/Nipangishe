@@ -5,12 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentEase - Find Your Next Home</title>
     <link rel="stylesheet" href="/Assets/styles/style.css" />
+    <link rel="stylesheet" href="/Assets/fonts/css/all.min.css" />
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- Navigation Bar -->
     <header>
       <nav class="navbar">
         <div class="logo">RentEase</div>
+        <div class="menu-icon" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </div>
         <ul class="nav-links">
           <li><a href="#">Home</a></li>
           <li><a href="#">Search Homes</a></li>
@@ -127,6 +135,10 @@
     </div>
 
     <script>
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        navLinks.classList.toggle("active");
+      }
       function openModal() {
         document.getElementById("loginModal").style.display = "flex";
       }
