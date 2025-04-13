@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Listings - RentEase</title>
+    <link rel="stylesheet" href="/Assets/styles/style.css" />
+  </head>
+  <body>
+    <div class="listings-container">
+      <h2>My House Listings</h2>
+      <div id="listings"></div>
+    </div>
+
+    <!-- 🧾 Edit Modal -->
+    <div id="editModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Edit Listing</h3>
+        <form id="editForm">
+          <input type="hidden" id="editId" />
+          <input
+            type="text"
+            id="editTitle"
+            placeholder="House Title"
+            required
+          />
+          <textarea
+            id="editDescription"
+            placeholder="Description"
+            required
+          ></textarea>
+          <input
+            type="number"
+            id="editPrice"
+            placeholder="Price (TSh)"
+            required
+          />
+          <input
+            type="text"
+            id="editLocation"
+            placeholder="Location"
+            required
+          />
+          <label for="editImage">Upload Image:</label>
+          <input type="file" id="editImage" accept="image/*" />
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ✅ Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeSuccessModal()">&times;</span>
+        <p>The listing is successfully edited.</p>
+        <button onclick="closeSuccessModal()">OK</button>
+      </div>
+    </div>
+
+    <script>
+      function loadListings() {
+        const listings =
+          JSON.parse(localStorage.getItem("lessorListings")) || [];
+        const listingsDiv = document.getElementById("listings");
+        listingsDiv.innerHTML = "";
+
+        if (listings.length === 0) {
+          listingsDiv.innerHTML = "<p>No listings available.</p>";
+          return;
+        }
+
+        listings.forEach((house) => {
+          const card = document.createElement("div");
+          card.className = "listing-card";
+
+          card.innerHTML = `
+            <img src="${house.image}" alt="House Image" class="listing-img"/>
+            <h3>${house.title}</h3>
+            <p><strong>Location:</strong> ${house.location}</p>
+            <p><strong>Price:</strong> TSh ${house.price}</p>
+            <p>${house.description}</p>
+            <button onclick="openEditModal(${house.id})">Edit</button>
+            <button onclick="deleteListing(${house.id})">Delete</button>
+          `;
+
+          listingsDiv.appendChild(card);
+        });
+      }
+
+      function deleteListing(id) {
+        let listings = JSON.parse(localStorage.getItem("lessorListings")) || [];
+        listings = listings.filter((h) => h.id !== id);
+        localStorage.setItem("lessorListings", JSON.stringify(listings));
+        loadListings();
+      }
+
+      function openEditModal(id) {
+        const listings =
+          JSON.parse(localStorage.getItem("lessorListings")) || [];
+        const house = listings.find((h) => h.id === id);
+        if (!house) return;
+
+        document.getElementById("editId").value = house.id;
+        document.getElementById("editTitle").value = house.title;
+        document.getElementById("editDescription").value = house.description;
+        document.getElementById("editPrice").value = house.price;
+        document.getElementById("editLocation").value = house.location;
+        document.getElementById("editImage").value = ""; // clear file input
+
+        document.getElementById("editModal").style.display = "block";
+      }
+
+      function closeModal() {
+        document.getElementById("editModal").style.display = "none";
+      }
+
+      function closeSuccessModal() {
+        document.getElementById("successModal").style.display = "none";
+        loadListings();
+      }
+
+      document
+        .getElementById("editForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const id = parseInt(document.getElementById("editId").value);
+          const title = document.getElementById("editTitle").value;
+          const description = document.getElementById("editDescription").value;
+          const price = document.getElementById("editPrice").value;
+          const location = document.getElementById("editLocation").value;
+          const imageFile = document.getElementById("editImage").files[0];
+
+          let listings =
+            JSON.parse(localStorage.getItem("lessorListings")) || [];
+          const index = listings.findIndex((h) => h.id === id);
+
+          if (index === -1) return;
+
+          function updateListing(imageData = null) {
+            listings[index].title = title;
+            listings[index].description = description;
+            listings[index].price = price;
+            listings[index].location = location;
+
+            if (imageData) {
+              listings[index].image = imageData;
+            }
+
+            localStorage.setItem("lessorListings", JSON.stringify(listings));
+            closeModal();
+            document.getElementById("successModal").style.display = "block";
+          }
+
+          if (imageFile) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+              updateListing(reader.result);
+            };
+            reader.readAsDataURL(imageFile);
+          } else {
+            updateListing(); // no new image
+          }
+        });
+
+      window.onload = loadListings;
+    </script>
+  </body>
+</html>

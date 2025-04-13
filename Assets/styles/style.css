@@ -374,3 +374,84 @@ footer .copyright {
   transform: scale(1.03);
   background: #e6f0ff;
 }
+
+/* Upload and my listing */
+.form-container,
+.listings-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+input,
+textarea,
+button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.listing-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.listing-img {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Reuse .modal and .modal-content styles */
+
+.modal-content p {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.modal-content button {
+  padding: 8px 16px;
+  background-color: #2ecc71;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
