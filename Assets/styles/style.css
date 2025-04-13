@@ -455,3 +455,17 @@ button {
   cursor: pointer;
   border-radius: 4px;
 }
+
+/* lessee */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 20px;
+}
+
+input[type="text"],
+input[type="number"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse Listings - RentEase</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>🏠 Browse Available Houses</h2>
+
+    <!-- 🔎 Filters -->
+    <div class="filters">
+      <input type="text" id="filterLocation" placeholder="Filter by Location" />
+      <input type="number" id="filterMinPrice" placeholder="Min Price" />
+      <input type="number" id="filterMaxPrice" placeholder="Max Price" />
+      <button onclick="filterListings()">Filter</button>
+    </div>
+
+    <!-- 📋 Listings -->
+    <div id="browseListings" class="listing-container"></div>
+
+    <script src="/Assets/js/lessee/lessee.js"></script>
+  </body>
+</html>

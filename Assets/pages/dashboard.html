@@ -20,9 +20,15 @@
       <div id="lesseeSection" class="dashboard-section" style="display: none">
         <h3>Lessee Dashboard</h3>
         <div class="card-grid">
-          <div class="card">🔍 Search Houses</div>
-          <div class="card">💾 Saved Listings</div>
-          <div class="card">📝 My Reviews</div>
+          <div class="card" onclick="location.href='browse.html'">
+            🔍 Search Houses
+          </div>
+          <div class="card" onclick="location.href='saved-listings.html'">
+            💾 Saved Listings
+          </div>
+          <div class="card" onclick="location.href='my-reviews.html'">
+            📝 My Reviews
+          </div>
         </div>
       </div>
 
@@ -60,11 +66,7 @@
       }
 
       function logout() {
-        localStorage.removeItem("loggedInUser"); // Correct key for logged-in user
-        window.location.href = "login.html";
-      }
-
-      function logout() {
+        localStorage.removeItem("loggedInUser");
         localStorage.removeItem("registeredUser");
         window.location.href = "login.html";
       }
