@@ -20,9 +20,7 @@
           <i class="fas fa-bars"></i>
         </div>
         <ul class="nav-links">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Search Homes</a></li>
-          <li><a href="#list-property">List Property</a></li>
+          <li><a href="#browse">Search Homes</a></li>
           <li><a href="#reviews">Reviews</a></li>
           <li><a href="/Assets/pages/Login.html">Login</a></li>
         </ul>
@@ -37,23 +35,13 @@
           Search and rent houses around your area or list your own property for
           others to find.
         </p>
-        <input type="text" placeholder="Search by location..." />
-        <button>Search</button>
       </section>
 
-      <!-- Carousel Section -->
+      <!-- Carousel Section with Dynamic Listings -->
       <section class="carousel">
         <h2>Featured Homes</h2>
-        <div class="carousel-container">
-          <img
-            src="/Assets/images/pics/224af26013601381bf0f155bbd223922.jpg"
-            alt="House 1"
-          />
-          <img
-            src="/Assets/images/pics/ai-generative-3d-modern-luxury-real-estate-house-for-sale-and-rent-luxury-property-concept-photo.jpg"
-            alt="House 2"
-          />
-          <img src="/Assets/images/pics/house3.jpg" alt="House 3" />
+        <div class="carousel-container" id="carouselContainer">
+          <!-- Listings will be inserted here -->
         </div>
       </section>
 
@@ -86,20 +74,16 @@
           <p>"Listing my property was easy and quick." – James K.</p>
         </div>
       </section>
-
-      <!-- List Property Section -->
-      <section id="list-property" class="list-property">
-        <h2>List Your Property</h2>
-        <form class="property-form">
-          <input type="text" placeholder="Property Title" required />
-          <input type="text" placeholder="Location" required />
-          <input type="number" placeholder="Price (Tsh)" required />
-          <input type="url" placeholder="Image URL" required />
-          <textarea placeholder="Description" required></textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </section>
     </main>
+
+    <!-- Login Reminder Modal -->
+    <div class="modal" id="loginReminderModal">
+      <div class="modal-content">
+        <span class="close" onclick="closeLoginReminder()">&times;</span>
+        <h3>Please login to your account first before you upload the house.</h3>
+        <button onclick="redirectToLogin()">Login</button>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -136,10 +120,10 @@
       </div>
     </div>
 
+    <!-- Scripts -->
     <script>
       function toggleMenu() {
-        const navLinks = document.querySelector(".nav-links");
-        navLinks.classList.toggle("active");
+        document.querySelector(".nav-links").classList.toggle("active");
       }
       function openModal() {
         document.getElementById("loginModal").style.display = "flex";
@@ -147,6 +131,25 @@
       function closeModal() {
         document.getElementById("loginModal").style.display = "none";
       }
+
+      // Load featured homes from localStorage
+      window.onload = function () {
+        const container = document.getElementById("carouselContainer");
+        const listings =
+          JSON.parse(localStorage.getItem("lessorListings")) || [];
+
+        if (listings.length === 0) {
+          container.innerHTML = "<p>No featured homes available.</p>";
+          return;
+        }
+
+        listings.slice(0, 5).forEach((house) => {
+          const img = document.createElement("img");
+          img.src = house.image || "/Assets/images/pics/house-placeholder.jpg";
+          img.alt = house.title;
+          container.appendChild(img);
+        });
+      };
     </script>
   </body>
 </html>

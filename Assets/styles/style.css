@@ -608,3 +608,19 @@ button[disabled] {
   background-color: #aaa;
   cursor: not-allowed;
 }
+
+/* Toggle Password */
+.toggle-password img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.toggle-password i {
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 1.2em;
+  vertical-align: middle;
+}
